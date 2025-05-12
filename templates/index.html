@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PredictHighEarnings</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2a9d8f;
+            --primary-light: #3ab7a8;
+            --primary-dark: #228176;
+            --success: #d4edda;
+            --success-text: #155724;
+            --warning: #fff3cd;
+            --warning-text: #856404;
+            --light: #f5f5f5;
+            --white: #ffffff;
+            --gray: #6c757d;
+            --dark: #333333;
+            --border: #e0e0e0;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+        
+        .header-container {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            margin-right: 2rem;
+        }
+        
+        .logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .header-text {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .header-text h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-text p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+        
+        .greeting {
+            font-size: 1rem;
+            font-weight: 300;
+            opacity: 0.8;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .form-container {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 3rem;
+            margin: -2rem auto 3rem;
+            position: relative;
+            box-sizing: border-box;
+        }
+        
+        .form-section {
+            margin-bottom: 2rem;
+        }
+        
+        .form-section h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-light);
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.6rem;
+            font-weight: 500;
+            font-size: 1rem;
+            color: var(--dark);
+        }
+        
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: var(--light);
+        }
+        
+        input[type="number"]:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(42, 157, 143, 0.2);
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+        }
+        
+        .radio-option input {
+            width: auto;
+            margin-right: 0.5rem;
+        }
+        
+        .btn {
+            display: block;
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 2rem auto 0;
+            width: 240px;
+            transition: var(--transition);
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .result {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.2rem;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .success {
+            background-color: var(--success);
+            color: var(--success-text);
+            border-left: 4px solid var(--success-text);
+        }
+        
+        .warning {
+            background-color: var(--warning);
+            color: var(--warning-text);
+            border-left: 4px solid var(--warning-text);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo-container {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+            
+            .form-container {
+                padding: 1.5rem;
+                margin-top: 0;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <div class="header">
+            <div class="logo-container">
+                <img src="{{ url_for('static', filename='images/loogo.png') }}" alt="Logo" class="logo">
+            </div>
+            <div class="header-text">
+                <h1>PredictHighEarnings</h1>
+                <p>Estimez si un individu gagne plus de 50K$/an</p>
+                <p class="greeting">Bonjour et bienvenue sur notre outil de prédiction !</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="form-container">
+            <form method="POST" action="/predict">
+                <div class="form-grid">
+                    <!-- Colonne 1 - Démographie -->
+                    <div class="form-section">
+                        <h3>Démographie</h3>
+                        <div class="form-group">
+                            <label for="age">Âge</label>
+                            <input type="number" id="age" name="age" min="17" max="90" value="30" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Sexe</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" id="sex_male" name="sex" value="Male" checked>
+                                    <label for="sex_male">Homme</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="sex_female" name="sex" value="Female">
+                                    <label for="sex_female">Femme</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="education">Niveau d'éducation</label>
+                            <select id="education" name="education" required>
+                                <option value="Bachelors">Bachelors</option>
+                                <option value="Some-college">Some-college</option>
+                                <option value="11th">11th</option>
+                                <option value="HS-grad">HS-grad</option>
+                                <option value="Prof-school">Prof-school</option>
+                                <option value="Assoc-acdm">Assoc-acdm</option>
+                                <option value="Assoc-voc">Assoc-voc</option>
+                                <option value="9th">9th</option>
+                                <option value="7th-8th">7th-8th</option>
+                                <option value="12th">12th</option>
+                                <option value="Masters">Masters</option>
+                                <option value="1st-4th">1st-4th</option>
+                                <option value="10th">10th</option>
+                                <option value="Doctorate">Doctorate</option>
+                                <option value="5th-6th">5th-6th</option>
+                                <option value="Preschool">Preschool</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Colonne 2 - Emploi -->
+                    <div class="form-section">
+                        <h3>Emploi</h3>
+                        <div class="form-group">
+                            <label for="workclass">Secteur d'activité</label>
+                            <select id="workclass" name="workclass" required>
+                                <option value="Private">Private</option>
+                                <option value="Self-emp-not-inc">Self-emp-not-inc</option>
+                                <option value="Self-emp-inc">Self-emp-inc</option>
+                                <option value="Federal-gov">Federal-gov</option>
+                                <option value="Local-gov">Local-gov</option>
+                                <option value="State-gov">State-gov</option>
+                                <option value="Without-pay">Without-pay</option>
+                                <option value="Never-worked">Never-worked</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="occupation">Profession</label>
+                            <select id="occupation" name="occupation" required>
+                                <option value="Tech-support">Tech-support</option>
+                                <option value="Craft-repair">Craft-repair</option>
+                                <option value="Other-service">Other-service</option>
+                                <option value="Sales">Sales</option>
+                                <option value="Exec-managerial">Exec-managerial</option>
+                                <option value="Prof-specialty">Prof-specialty</option>
+                                <option value="Handlers-cleaners">Handlers-cleaners</option>
+                                <option value="Machine-op-inspct">Machine-op-inspct</option>
+                                <option value="Adm-clerical">Adm-clerical</option>
+                                <option value="Farming-fishing">Farming-fishing</option>
+                                <option value="Transport-moving">Transport-moving</option>
+                                <option value="Priv-house-serv">Priv-house-serv</option>
+                                <option value="Protective-serv">Protective-serv</option>
+                                <option value="Armed-Forces">Armed-Forces</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="hours_per_week">Heures/semaine</label>
+                            <input type="number" id="hours_per_week" name="hours_per_week" min="1" max="99" value="40" required>
+                        </div>
+                    </div>
+                    
+                    <!-- Colonne 3 - Finances -->
+                    <div class="form-section">
+                        <h3>Finances</h3>
+                        <div class="form-group">
+                            <label for="capital_gain">Gain capital ($)</label>
+                            <input type="number" id="capital_gain" name="capital_gain" min="0" max="100000" value="0" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="capital_loss">Perte capital ($)</label>
+                            <input type="number" id="capital_loss" name="capital_loss" min="0" max="100000" value="0" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="marital_status">Statut marital</label>
+                            <select id="marital_status" name="marital_status" required>
+                                <option value="Married-civ-spouse">Married-civ-spouse</option>
+                                <option value="Divorced">Divorced</option>
+                                <option value="Never-married">Never-married</option>
+                                <option value="Separated">Separated</option>
+                                <option value="Widowed">Widowed</option>
+                                <option value="Married-spouse-absent">Married-spouse-absent</option>
+                                <option value="Married-AF-spouse">Married-AF-spouse</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn">Prédire le revenu</button>
+            </form>
+            
+            {% if prediction_text %}
+            <div class="result {% if 'Erreur' in prediction_text %}warning{% else %}success{% endif %}">
+                <h2>{{ prediction_text }}</h2>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
