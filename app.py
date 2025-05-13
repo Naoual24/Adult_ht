@@ -8,7 +8,7 @@ import os
 app = Flask(__name__)
 
 # Chemins des fichiers
-drive_path = "/content/drive/MyDrive/ton_dossier/"  
+drive_path = "https://drive.google.com/file/d/1teo8bZzMpUz6nuHm5J4bnxKCOAica7Bd/view?usp=sharing"  
 model_path = os.path.join(drive_path, "adulte.joblib")
 colonnes_path = "colonnes.joblib" 
 
