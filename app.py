@@ -8,9 +8,9 @@ import os
 app = Flask(__name__)
 
 # Chemins des fichiers
-drive_path = "/content/drive/MyDrive/ton_dossier/"  # Remplace "ton_dossier" par le nom de ton dossier
+drive_path = "/content/drive/MyDrive/ton_dossier/"  
 model_path = os.path.join(drive_path, "adulte.joblib")
-colonnes_path = "colonnes.joblib"  # Le fichier colonnes reste dans le répertoire courant
+colonnes_path = "colonnes.joblib" 
 
 # Charger le modèle
 try:
